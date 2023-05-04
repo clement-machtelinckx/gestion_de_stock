@@ -22,7 +22,9 @@ class Boutique:
     def read_produit(self):
         query = "SELECT * FROM produit"
         self.cursor.execute(query)
-        return self.cursor.fetchall
+        resultat = self.cursor.fetchall()
+        for row in resultat:
+            print(row)
 
 
     def update_produit(self, id, nom, prix, quantite, id_categorie, description):
@@ -64,6 +66,7 @@ bout = Boutique()
 # bout.add_produit("saumon", 15, 628, 4, "poisson sashimi")
 
 # bout.update_produit(5, "courgette", 1, 345, 2, "dark courgette")
+bout.read_produit()
 
 
 
