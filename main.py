@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from class_ import DatabaseManager
+from class_boutique import DatabaseManager
 
 # Remplacez ces valeurs par celles de votre base de données
 host = "localhost"
@@ -10,11 +10,12 @@ database = "boutique"
 
 db_manager = DatabaseManager(host, user, password, database)
 
+
 class BoutiqueApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Boutique - Gestion des Stocks")
-        self.geometry("1000x600")       
+        self.geometry("1000x600")
 
         self.create_widgets()
 
@@ -24,7 +25,8 @@ class BoutiqueApp(tk.Tk):
         main_frame.pack(pady=20)
 
         # Treeview pour afficher les produits
-        self.product_tree = ttk.Treeview(main_frame, columns=("ID", "Nom", "Prix", "Quantité", "ID Catégorie", "Description"))
+        self.product_tree = ttk.Treeview(main_frame,
+                                         columns=("ID", "Nom", "Prix", "Quantité", "ID Catégorie", "Description"))
         self.product_tree.heading("ID", text="ID")
         self.product_tree.heading("Nom", text="Nom")
         self.product_tree.heading("Description", text="Description")
@@ -52,10 +54,12 @@ class BoutiqueApp(tk.Tk):
         self.add_product_button = ttk.Button(button_frame, text="Ajouter un produit", command=self.add_product)
         self.add_product_button.grid(row=0, column=0, padx=5)
 
-        self.edit_product_button = ttk.Button(button_frame, text="Modifier le produit sélectionné", command=self.edit_product)
+        self.edit_product_button = ttk.Button(button_frame, text="Modifier le produit sélectionné",
+                                              command=self.edit_product)
         self.edit_product_button.grid(row=0, column=1, padx=5)
 
-        self.delete_product_button = ttk.Button(button_frame, text="Supprimer le produit sélectionné", command=self.delete_product)
+        self.delete_product_button = ttk.Button(button_frame, text="Supprimer le produit sélectionné",
+                                                command=self.delete_product)
         self.delete_product_button.grid(row=0, column=2, padx=5)
 
         # Rafraîchir les produits au démarrage de l'application
@@ -166,7 +170,7 @@ class BoutiqueApp(tk.Tk):
             )
             edit_product_window.destroy()
             self.refresh_products()
-        
+
         update_button = ttk.Button(edit_product_window, text="Mettre à jour", command=update_product)
         update_button.pack(pady=20)
 
@@ -182,6 +186,7 @@ class BoutiqueApp(tk.Tk):
         if confirmation:
             db_manager.delete_produit(int(product_data[0]))
             self.refresh_products()
+
 
 if __name__ == "__main__":
     app = BoutiqueApp()
